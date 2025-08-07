@@ -1,0 +1,120 @@
+/* Custom styles to match Figma design */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap');
+
+/* Custom gradient background */
+.custom-gradient {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  background: linear-gradient(265.9deg,
+       #1D1515 16.75%, #342020 57.09%, #1D1515 97.42%);
+}
+
+
+/* Custom font family */
+.font-instrument {
+  font-family: 'Instrument Sans', sans-serif;
+}
+
+/* Custom text styles */
+.greeting-text {
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 1.22;
+  color: #FFFFFF;
+}
+
+.description-text {
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 1.22;
+  color: #FFFFFF;
+}
+
+.nav-text {
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.22;
+  color: #FFFFFF;
+}
+
+.nav-text.active {
+  color: #BA3D01;
+}
+
+/* Custom button underline */
+.nav-button.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background-color: #BA3D01;
+}
+
+/* Profile image positioning */
+.profile-image {
+  position: relative;
+  left: -8px;
+  top: -37px;
+}
+
+/* Journey image positioning */
+.journey-image {
+  position: relative;
+  left: 800px;
+  top: 170px;
+}
+
+/* Bottom image positioning */
+.bottom-image {
+  position: relative;
+  left: 364px;
+  top: 799px;
+}
+
+/* Custom spacing and layout */
+.content-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .greeting-text {
+    font-size: 32px;
+  }
+
+  .description-text {
+    font-size: 15px;
+  }
+
+  .journey-image {
+    position: static;
+    margin-top: 2rem;
+  }
+
+  .bottom-image {
+    position: static;
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .greeting-text {
+    font-size: 28px;
+  }
+
+  .description-text {
+    font-size: 14px;
+  }
+
+  .profile-image {
+    position: static;
+  }
+}
