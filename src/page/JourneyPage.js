@@ -1,13 +1,75 @@
 import { useNavigate } from 'react-router-dom';
-import bottomImage from '../assets/bottom-image.png';
+import { useState } from 'react';
+import { motion } from 'framer-motion';
 import educationImage from '../assets/education.jpg';
 import experienceImage from '../assets/experience.jpg';
 import projectImage from '../assets/project.jpg';
 import skillImage from '../assets/skill.jpg';
 import hackathonImage from '../assets/hackathon.jpg';
 
+const cardData = [
+    {
+        img: educationImage,
+        alt: 'Memory 1',
+        rotate: -17.28,
+        marginLeft: 0, zIndex: 5,
+        onClick: (navigate) => navigate('/education'),
+    },
+    {
+        img: experienceImage,
+        alt: 'Memory 2',
+        rotate: -3.32,
+        marginLeft: '-4vw', zIndex: 6,
+        onClick: (navigate) => navigate('/experience'),
+    },
+    {
+        img: skillImage,
+        alt: 'Memory 3',
+        rotate: -4.3,
+        marginLeft: '-4vw', zIndex: 7,
+        onClick: (navigate) => navigate('/skills'),
+    },
+    {
+        img: hackathonImage,
+        alt: 'Memory 4',
+        rotate: 5.11,
+        marginLeft: '-4vw', zIndex: 8,
+        onClick: () => { window.location.href = '/hackathon'; },
+    },
+    {
+        img: projectImage,
+        alt: 'Memory 5',
+        rotate: 12.01,
+        marginLeft: '-4vw', zIndex: 9,
+        onClick: () => { window.location.href = '/projects'; },
+    },
+];
+
+const cardVariants = {
+    hidden: (i) => ({ scale: 0.7, opacity: 0, y: 80, rotate: cardData[i].rotate }),
+    visible: (i) => ({
+        scale: 1,
+        opacity: 1,
+        y: 0,
+        rotate: cardData[i].rotate,
+        transition: {
+            type: 'spring',
+            bounce: 0.5,
+            delay: i * 0.18,
+            duration: 0.7,
+        },
+    }),
+};
+
 function JourneyPage() {
     const navigate = useNavigate();
+    const [showSubtitle, setShowSubtitle] = useState(false);
+
+    // Show subtitle after last card animates in
+    const handleLastCardAnimationComplete = () => {
+        setTimeout(() => setShowSubtitle(true), 150);
+    };
+
     return (
         <div className="custom-gradient font-instrument" style={{ position: 'relative', width: '100vw', minHeight: '100vh', overflow: 'hidden' }}>
             {/* Title */}
@@ -17,14 +79,19 @@ function JourneyPage() {
             }}>
                 A Chapter from My Memory
             </div>
-            {/* Subtitle */}
-            <div style={{
-                position: 'absolute', left: 0, right: 0, top: '27vh', textAlign: 'center',
-                fontFamily: 'Instrument Sans', fontWeight: 600, fontSize: '1.2vw', lineHeight: '1.2', color: '#FFFFFF', zIndex: 2,
-            }}>
+            {/* Subtitle (animated) */}
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={showSubtitle ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0 }}
+                style={{
+                    position: 'absolute', left: 0, right: 0, top: '27vh', textAlign: 'center',
+                    fontFamily: 'Instrument Sans', fontWeight: 600, fontSize: '1.2vw', lineHeight: '1.2', color: '#FFFFFF', zIndex: 2,
+                }}
+            >
                 Pick a piece of my memory and press play.
-            </div>
-            {/* Card Row */}
+            </motion.div>
+            {/* Card Row (animated) */}
             <div
                 style={{
                     position: 'absolute',
@@ -35,54 +102,33 @@ function JourneyPage() {
                     flexDirection: 'row',
                     justifyContent: 'center',
                     alignItems: 'flex-end',
-                    gap: 0, // Remove gap for overlap
+                    gap: 0,
                     zIndex: 2,
-                    flexWrap: 'nowrap', // Prevent wrapping for overlap
-                    pointerEvents: 'none', // Prevent parent from blocking pointer events
+                    flexWrap: 'nowrap',
+                    pointerEvents: 'none',
                 }}
             >
-                <div style={{ width: '16vw', minWidth: 120, maxWidth: 260, aspectRatio: '1/1', cursor: 'pointer', transform: 'rotate(-17.28deg)', boxShadow: '0px 10px 4px 0px rgba(0,0,0,0.25)', marginLeft: 0, pointerEvents: 'auto', zIndex: 5 }} onClick={() => navigate('/education')}>
-                    <img
-                        src={educationImage}
-                        alt="Memory 1"
-                        style={{ width: '100%', height: '100%', borderRadius: 15, objectFit: 'cover' }}
-                    />
-                </div>
-                <div style={{ width: '16vw', minWidth: 120, maxWidth: 260, aspectRatio: '1/1', cursor: 'pointer', transform: 'rotate(-3.32deg)', boxShadow: '0px 10px 4px 0px rgba(0,0,0,0.25)', marginLeft: '-4vw', pointerEvents: 'auto', zIndex: 6 }} onClick={() => navigate('/experience')}>
-                    <img
-                        src={experienceImage}
-                        alt="Memory 2"
-                        style={{ width: '100%', height: '100%', borderRadius: 15, objectFit: 'cover' }}
-                    />
-                </div>
-                <div style={{ width: '16vw', minWidth: 120, maxWidth: 260, aspectRatio: '1/1', cursor: 'pointer', transform: 'rotate(-4.3deg)', boxShadow: '0px 10px 4px 0px rgba(0,0,0,0.25)', marginLeft: '-4vw', pointerEvents: 'auto', zIndex: 7 }} onClick={() => navigate('/skills')}>
-                    <img
-                        src={skillImage}
-                        alt="Memory 3"
-                        style={{ width: '100%', height: '100%', borderRadius: 15, objectFit: 'cover' }}
-                    />
-                </div>
-                <div style={{ width: '16vw', minWidth: 120, maxWidth: 260, aspectRatio: '1/1', cursor: 'pointer', transform: 'rotate(5.11deg)', boxShadow: '0px 10px 4px 0px rgba(0,0,0,0.25)', marginLeft: '-4vw', pointerEvents: 'auto', zIndex: 8 }} onClick={() => window.location.href = '/hackathon'}>
-                    <img
-                        src={hackathonImage}
-                        alt="Memory 4"
-                        style={{ width: '100%', height: '100%', borderRadius: 15, objectFit: 'cover' }}
-                    />
-                </div>
-                <div style={{ width: '16vw', minWidth: 120, maxWidth: 260, aspectRatio: '1/1', cursor: 'pointer', transform: 'rotate(12.01deg)', boxShadow: '0px 10px 4px 0px rgba(0,0,0,0.25)', marginLeft: '-4vw', pointerEvents: 'auto', zIndex: 9 }} onClick={() => window.location.href = '/projects'}>
-                    <img
-                        src={projectImage}
-                        alt="Memory 5"
-                        style={{ width: '100%', height: '100%', borderRadius: 15, objectFit: 'cover' }}
-                    />
-                </div>
+                {cardData.map((card, i) => (
+                    <motion.div
+                        key={i}
+                        custom={i}
+                        initial="hidden"
+                        animate="visible"
+                        variants={cardVariants}
+                        onAnimationComplete={i === cardData.length - 1 ? handleLastCardAnimationComplete : undefined}
+                        style={{
+                            width: '16vw', minWidth: 120, maxWidth: 260, aspectRatio: '1/1', cursor: 'pointer', boxShadow: '0px 10px 4px 0px rgba(0,0,0,0.25)', pointerEvents: 'auto', position: 'relative', ...card.style
+                        }}
+                        onClick={() => card.onClick(navigate)}
+                    >
+                        <img
+                            src={card.img}
+                            alt={card.alt}
+                            style={{ width: '100%', height: '100%', borderRadius: 15, objectFit: 'cover' }}
+                        />
+                    </motion.div>
+                ))}
             </div>
-            {/* Bottom image */}
-            <img
-                src={bottomImage}
-                alt="Bottom design element"
-                style={{ position: 'absolute', left: '50%', top: '70vh', transform: 'translateX(-50%)', width: '40vw', minWidth: 180, maxWidth: 600, height: 'auto', objectFit: 'cover', zIndex: 1 }}
-            />
         </div>
     );
 }
