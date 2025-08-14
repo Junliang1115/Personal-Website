@@ -90,11 +90,11 @@ function ContactPage() {
                     <div style={{ display: 'flex', gap: '1vw', width: '100%' }}>
                         <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                             <label style={{ color: '#fff', fontWeight: 600, fontSize: '1vw', marginBottom: 4 }}>First name</label>
-                            <input type="text" placeholder="" required style={{ width: '100%', marginTop: 4, background: '#E5DFDF', border: 'none', borderRadius: 8, padding: '0.6vw 0.8vw', fontSize: '0.95vw', fontFamily: 'Instrument Sans', fontWeight: 500 }} />
+                            <input type="text" placeholder="John" required style={{ width: '100%', marginTop: 4, background: '#E5DFDF', border: 'none', borderRadius: 8, padding: '0.6vw 0.8vw', fontSize: '0.95vw', fontFamily: 'Instrument Sans', fontWeight: 500 }} />
                         </div>
                         <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                             <label style={{ color: '#fff', fontWeight: 600, fontSize: '1vw', marginBottom: 4 }}>Last name</label>
-                            <input type="text" placeholder="" required style={{ width: '100%', marginTop: 4, background: '#E5DFDF', border: 'none', borderRadius: 8, padding: '0.6vw 0.8vw', fontSize: '0.95vw', fontFamily: 'Instrument Sans', fontWeight: 500 }} />
+                            <input type="text" placeholder="Doe" required style={{ width: '100%', marginTop: 4, background: '#E5DFDF', border: 'none', borderRadius: 8, padding: '0.6vw 0.8vw', fontSize: '0.95vw', fontFamily: 'Instrument Sans', fontWeight: 500 }} />
                         </div>
                     </div>
                     <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
@@ -107,7 +107,7 @@ function ContactPage() {
                     </div>
                     <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
                         <label style={{ color: '#fff', fontWeight: 600, fontSize: '1vw', marginBottom: 4 }}>Message</label>
-                        <textarea placeholder="" required style={{ width: '100%', marginTop: 4, background: '#E5DFDF', border: 'none', borderRadius: 8, padding: '0.6vw 0.8vw', fontSize: '0.95vw', fontFamily: 'Instrument Sans', fontWeight: 500, minHeight: 90, resize: 'vertical' }} />
+                        <textarea placeholder="Write a thought..." required style={{ width: '100%', marginTop: 4, background: '#E5DFDF', border: 'none', borderRadius: 8, padding: '0.6vw 0.8vw', fontSize: '0.95vw', fontFamily: 'Instrument Sans', fontWeight: 500, minHeight: 90, resize: 'vertical' }} />
                     </div>
                     <button type="submit" style={{ background: '#BA3D01', color: '#fff', border: 'none', borderRadius: 8, padding: '0.7vw', fontWeight: 600, fontSize: '1vw', marginTop: '1vh', cursor: 'pointer', alignSelf: 'flex-end', width: '30%' }}>Send Message</button>
                 </form>
