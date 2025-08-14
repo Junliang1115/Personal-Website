@@ -249,12 +249,6 @@ function ExperiencePage() {
                     </button>
                 </div>
             </div>
-            {/* Bottom Image */}
-            <img
-                src={bottomImage}
-                alt="Bottom design element"
-                style={{ position: 'absolute', left: '27vw', top: '72vh', width: '46vw', height: '46vw', minWidth: 200, minHeight: 200, objectFit: 'cover', zIndex: 1 }}
-            />
         </div>
     );
 }

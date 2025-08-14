@@ -29,11 +29,16 @@ function Navigation() {
                 justifyContent: 'space-between',
             }}>
                 {/* Logo */}
-                <img
-                    src={logoImage}
-                    alt="Logo"
-                    style={{ marginTop: 20, width: 207 }}
-                />
+                <div
+                    onClick={() => navigate('/')}
+                    style={{ cursor: 'pointer' }}
+                >
+                    <img
+                        src={logoImage}
+                        alt="Logo"
+                        style={{ marginTop: 20, width: 207 }}
+                    />
+                </div>
                 {/* Nav Items */}
                 <div style={{ display: 'flex', gap: 48, alignItems: 'center' }}>
                     <span

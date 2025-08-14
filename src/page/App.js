@@ -175,7 +175,7 @@ function RotatingNavigation() {
         bottom: 0,
         left: '50%',
         transform: 'translateX(-50%)',
-        zIndex: 50,
+        zIndex: isExpanded ? '50' : '3',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -201,6 +201,7 @@ function RotatingNavigation() {
             borderRadius: '20px',
             backdropFilter: 'blur(10px)',
             userSelect: 'none',
+            zIndex: 10,
           }}
         >
           {currentPageName}

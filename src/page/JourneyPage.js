@@ -19,28 +19,28 @@ const cardData = [
         img: experienceImage,
         name: 'Experience',
         rotate: -3.32,
-        marginLeft: '-4vw', zIndex: 6,
+        marginLeft: '-3vw', zIndex: 6,
         path: '/experience',
     },
     {
         img: skillImage,
         name: 'Skills',
         rotate: -4.3,
-        marginLeft: '-4vw', zIndex: 7,
+        marginLeft: '-3vw', zIndex: 7,
         path: '/skills',
     },
     {
         img: hackathonImage,
         name: 'Hackathons',
         rotate: 5.11,
-        marginLeft: '-4vw', zIndex: 8,
+        marginLeft: '-3vw', zIndex: 8,
         path: '/hackathon',
     },
     {
         img: projectImage,
         name: 'Projects',
         rotate: 12.01,
-        marginLeft: '-4vw', zIndex: 9,
+        marginLeft: '-3vw', zIndex: 9,
         path: '/projects',
     },
 ];
@@ -85,6 +85,7 @@ function JourneyPage() {
             y: 0,
             rotate: cardData[i].rotate,
             scale: 1,
+            zIndex: cardData[i].zIndex, // Explicitly set zIndex for visible state
             transition: { type: 'spring', bounce: 0.3, duration: 0.5 },
         }),
         hover: (i) => ({
@@ -119,7 +120,7 @@ function JourneyPage() {
             </motion.div>
 
             {/* Card Row */}
-            <div style={{ position: 'absolute', left: 0, right: 0, top: '37vh', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-end', zIndex: 2 }}>
+            <div style={{ position: 'absolute', left: 0, right: 0, top: '37vh', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-end', zIndex: 10 }}>
                 {cardData.map((card, i) => (
                     <motion.div
                         key={card.name}
@@ -142,14 +143,16 @@ function JourneyPage() {
             </div>
 
             {/* Hover Name Display */}
-            <motion.div
-                variants={nameVariants}
-                initial="initial"
-                animate={hoveredIndex !== null ? "hover" : "initial"}
-                style={{ position: 'absolute', bottom: '28vh', left: 0, right: 0, textAlign: 'center', color: 'white', fontWeight: 600, fontSize: '1.2vw', pointerEvents: 'none', zIndex: 10 }}
-            >
-                {hoveredIndex !== null && cardData[hoveredIndex].name}
-            </motion.div>
+            {hoveredIndex !== null && (
+                <motion.div
+                    variants={nameVariants}
+                    initial="initial"
+                    animate="hover"
+                    style={{ position: 'absolute', bottom: '28vh', left: 0, right: 0, textAlign: 'center', color: 'white', fontWeight: 600, fontSize: '1.2vw', pointerEvents: 'none', zIndex: 10 }}
+                >
+                    {cardData[hoveredIndex].name}
+                </motion.div>
+            )}
         </div>
     );
 }

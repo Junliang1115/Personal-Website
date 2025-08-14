@@ -112,12 +112,6 @@ function ContactPage() {
                     <button type="submit" style={{ background: '#BA3D01', color: '#fff', border: 'none', borderRadius: 8, padding: '0.7vw', fontWeight: 600, fontSize: '1vw', marginTop: '1vh', cursor: 'pointer', alignSelf: 'flex-end', width: '30%' }}>Send Message</button>
                 </form>
             </div>
-            {/* Bottom Image */}
-            <img
-                src={bottomImage}
-                alt="Bottom design element"
-                style={{ position: 'absolute', left: '27vw', top: '72vh', width: '46vw', height: '46vw', minWidth: 200, minHeight: 200, objectFit: 'cover', zIndex: 1 }}
-            />
         </div>
     );
 }
