@@ -230,8 +230,8 @@ function RotatingNavigation() {
       {/* Rotating Bottom Image - Sticky at bottom, half visible */}
       <div
         style={{
-          width: isExpanded ? '380px' : '260px',
-          height: isExpanded ? '380px' : '260px',
+          width: isExpanded ? '380px' : '500px',
+          height: isExpanded ? '380px' : '500px',
           userSelect: 'none',
           display: 'flex',
           alignItems: 'center',
@@ -245,9 +245,9 @@ function RotatingNavigation() {
         {isExpanded && (
           <>
             <div style={{ position: 'absolute', top: '-36px', left: '50%', transform: 'translateX(-50%)', color: '#FFFFFF', fontFamily: 'Instrument Sans', fontWeight: 600, fontSize: '13px', opacity: 0.85, textAlign: 'center', userSelect: 'none' }}>About</div>
-            <div style={{ position: 'absolute', top: '50%', right: '-48px', transform: 'translateY(-50%)', color: '#FFFFFF', fontFamily: 'Instrument Sans', fontWeight: 600, fontSize: '13px', opacity: 0.85, textAlign: 'center', userSelect: 'none' }}>Journey</div>
+            <div style={{ position: 'absolute', top: '50%', right: '-53px', transform: 'translateY(-50%)', color: '#FFFFFF', fontFamily: 'Instrument Sans', fontWeight: 600, fontSize: '13px', opacity: 0.85, textAlign: 'center', userSelect: 'none' }}>Journey</div>
             <div style={{ position: 'absolute', bottom: '-36px', left: '50%', transform: 'translateX(-50%)', color: '#FFFFFF', fontFamily: 'Instrument Sans', fontWeight: 600, fontSize: '13px', opacity: 0.85, textAlign: 'center', userSelect: 'none' }}>Availability</div>
-            <div style={{ position: 'absolute', top: '50%', left: '-48px', transform: 'translateY(-50%)', color: '#FFFFFF', fontFamily: 'Instrument Sans', fontWeight: 600, fontSize: '13px', opacity: 0.85, textAlign: 'center', userSelect: 'none' }}>Contact</div>
+            <div style={{ position: 'absolute', top: '50%', left: '-53px', transform: 'translateY(-50%)', color: '#FFFFFF', fontFamily: 'Instrument Sans', fontWeight: 600, fontSize: '13px', opacity: 0.85, textAlign: 'center', userSelect: 'none' }}>Contact</div>
           </>
         )}
         <motion.img
