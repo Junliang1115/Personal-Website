@@ -1,7 +1,13 @@
+import { useState } from 'react';
 import { FaEnvelope, FaGithub, FaLinkedin, FaInstagram, FaDiscord } from 'react-icons/fa';
-import bottomImage from '../assets/bottom-image.png';
 
 function ContactPage() {
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [message, setMessage] = useState('');
+
     return (
         <div
             style={{
@@ -77,7 +83,6 @@ function ContactPage() {
                     maxHeight: 700,
                     background: 'rgba(0, 0, 0, 0.98)',
                     borderRadius: 15,
-                    zIndex: 2,
                     overflow: 'hidden',
                     padding: '3vw 2vw',
                     display: 'flex',
@@ -94,20 +99,32 @@ function ContactPage() {
                         </div>
                         <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                             <label style={{ color: '#fff', fontWeight: 600, fontSize: '1vw', marginBottom: 4 }}>Last name</label>
-                            <input type="text" placeholder="Doe" required style={{ width: '100%', marginTop: 4, background: '#E5DFDF', border: 'none', borderRadius: 8, padding: '0.6vw 0.8vw', fontSize: '0.95vw', fontFamily: 'Instrument Sans', fontWeight: 500 }} />
+                            <input type="text" placeholder="Doe" required
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                            style={{ width: '100%', marginTop: 4, background: '#E5DFDF', border: 'none', borderRadius: 8, padding: '0.6vw 0.8vw', fontSize: '0.95vw', fontFamily: 'Instrument Sans', fontWeight: 500 }} />
                         </div>
                     </div>
                     <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
                         <label style={{ color: '#fff', fontWeight: 600, fontSize: '1vw', marginBottom: 4 }}>Email</label>
-                        <input type="email" placeholder="someone@gmail.com" required style={{ width: '100%', marginTop: 4, background: '#E5DFDF', border: 'none', borderRadius: 8, padding: '0.6vw 0.8vw', fontSize: '0.95vw', fontFamily: 'Instrument Sans', fontWeight: 500 }} />
+                        <input type="email" placeholder="someone@gmail.com" required
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            style={{ width: '100%', marginTop: 4, background: '#E5DFDF', border: 'none', borderRadius: 8, padding: '0.6vw 0.8vw', fontSize: '0.95vw', fontFamily: 'Instrument Sans', fontWeight: 500 }} />
                     </div>
                     <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
                         <label style={{ color: '#fff', fontWeight: 600, fontSize: '1vw', marginBottom: 4 }}>Phone Number</label>
-                        <input type="tel" placeholder="012 - 345 6789" style={{ width: '100%', marginTop: 4, background: '#E5DFDF', border: 'none', borderRadius: 8, padding: '0.6vw 0.8vw', fontSize: '0.95vw', fontFamily: 'Instrument Sans', fontWeight: 500 }} />
+                        <input type="tel" placeholder="012 - 345 6789"
+                            value={phoneNumber}
+                            onChange={(e) => setPhoneNumber(e.target.value)}
+                            style={{ width: '100%', marginTop: 4, background: '#E5DFDF', border: 'none', borderRadius: 8, padding: '0.6vw 0.8vw', fontSize: '0.95vw', fontFamily: 'Instrument Sans', fontWeight: 500, zIndex: 4 }} />
                     </div>
                     <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
                         <label style={{ color: '#fff', fontWeight: 600, fontSize: '1vw', marginBottom: 4 }}>Message</label>
-                        <textarea placeholder="Write a thought..." required style={{ width: '100%', marginTop: 4, background: '#E5DFDF', border: 'none', borderRadius: 8, padding: '0.6vw 0.8vw', fontSize: '0.95vw', fontFamily: 'Instrument Sans', fontWeight: 500, minHeight: 90, resize: 'vertical' }} />
+                        <textarea type="text" placeholder="Write a thought..." required
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
+                            style={{ width: '100%', marginTop: 4, background: '#E5DFDF', border: 'none', borderRadius: 8, padding: '0.6vw 0.8vw', fontSize: '0.95vw', fontFamily: 'Instrument Sans', fontWeight: 500, minHeight: 90, resize: 'vertical', zIndex: 10 , position: 'relative'}} />
                     </div>
                     <button type="submit" style={{ background: '#BA3D01', color: '#fff', border: 'none', borderRadius: 8, padding: '0.7vw', fontWeight: 600, fontSize: '1vw', marginTop: '1vh', cursor: 'pointer', alignSelf: 'flex-end', width: '30%' }}>Send Message</button>
                 </form>
