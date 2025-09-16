@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import educationImage from '../assets/education.jpg';
 import experienceImage from '../assets/experience.jpg';
-import projectImage from '../assets/project.jpg';
 import skillImage from '../assets/skill.jpg';
 import hackathonImage from '../assets/hackathon.jpg';
 
@@ -36,13 +35,6 @@ const cardData = [
         marginLeft: '-3vw', zIndex: 8,
         path: '/hackathon',
     },
-    {
-        img: projectImage,
-        name: 'Projects',
-        rotate: 12.01,
-        marginLeft: '-3vw', zIndex: 9,
-        path: '/projects',
-    },
 ];
 
 function JourneyPage() {
@@ -52,14 +44,7 @@ function JourneyPage() {
     const [hoveredIndex, setHoveredIndex] = useState(null);
     const controls = useAnimation();
 
-    const handleCardClick = (path) => {
-        if (!isHoverEnabled) return;
-        const clickedIndex = cardData.findIndex(card => card.path === path);
-        controls.start(i => i === clickedIndex ? 'group' : 'hidden');
-        setTimeout(() => navigate(path), 800);
-    };
-
-    useEffect(() => {
+    useEffect(() => { // eslint-disable-next-line react-hooks/exhaustive-deps
         const sequence = async () => {
             await controls.start('noOverlap');
             await new Promise(res => setTimeout(res, 600));
@@ -67,7 +52,7 @@ function JourneyPage() {
             setShowSubtitle(true);
             setIsHoverEnabled(true);
         };
-        sequence();
+                sequence();
     }, []);
 
     const cardVariants = {
@@ -112,15 +97,33 @@ function JourneyPage() {
     };
 
     return (
-        <div className="custom-gradient font-instrument" style={{ position: 'relative', width: '100vw', minHeight: '100vh', overflow: 'hidden' }}>
+        <div className="custom-gradient font-instrument" style={{ position: 'relative', width: '100vw', minHeight: '100vh', overflow: 'hidden', padding: 'clamp(8px, 4vw, 32px)' }}>
             {/* Title and Subtitle */}
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.2 }} style={{ position: 'absolute', left: 0, right: 0, top: '18vh', textAlign: 'center', zIndex: 2 }}>
-                <div style={{ fontFamily: 'Instrument Sans', fontWeight: 600, fontSize: '2.8vw', lineHeight: '1.2', color: '#FFFFFF' }}>A Chapter from My Memory</div>
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={showSubtitle ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} style={{ fontFamily: 'Instrument Sans', fontWeight: 600, fontSize: '1.2vw', lineHeight: '1.2', color: '#FFFFFF', marginTop: '2vh' }}>Pick a piece of my memory and press play.</motion.div>
-            </motion.div>
+            <div style={{ width: '100%', textAlign: 'center', marginTop: 'clamp(6vh, 10vh, 14vh)', marginBottom: window.innerWidth < 600 ? 'clamp(32px, 8vw, 64px)' : 0 }}>
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.2 }}>
+                    <div style={{ fontFamily: 'Instrument Sans', fontWeight: 600, fontSize: 'clamp(1.3rem, 6vw, 2.8vw)', lineHeight: '1.2', color: '#FFFFFF' }}>A Chapter from My Memory</div>
+                    <motion.div initial={{ opacity: 0, y: 20 }} animate={showSubtitle ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} style={{ fontFamily: 'Instrument Sans', fontWeight: 600, fontSize: 'clamp(1rem, 4vw, 1.2vw)', lineHeight: '1.2', color: '#FFFFFF', marginTop: '2vh' }}>Pick a piece of my memory and press play.</motion.div>
+                </motion.div>
+            </div>
 
             {/* Card Row */}
-            <div style={{ position: 'absolute', left: 0, right: 0, top: '37vh', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-end', zIndex: 10 }}>
+            <div
+                style={{
+                    position: window.innerWidth < 600 ? 'relative' : 'absolute',
+                    left: window.innerWidth < 600 ? undefined : 0,
+                    right: window.innerWidth < 600 ? undefined : 0,
+                    top: window.innerWidth < 600 ? undefined : 'clamp(0vh, 37vh, 70vh)',
+                    display: 'flex',
+                    flexDirection: window.innerWidth < 600 ? 'column' : 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    zIndex: 10,
+                    gap: window.innerWidth <= 900 ? 'clamp(-60px, -30vw, -32px)' : '0',
+                    width: '100%',
+                    padding: window.innerWidth < 600 ? 'clamp(8px, 4vw, 32px)' : 0,
+                    marginBottom: '10vh', // Added margin bottom for mobile view
+                }}
+            >
                 {cardData.map((card, i) => (
                     <motion.div
                         key={card.name}
@@ -130,8 +133,20 @@ function JourneyPage() {
                         animate={!isHoverEnabled ? controls : (hoveredIndex === i ? "hover" : "visible")}
                         onHoverStart={() => isHoverEnabled && setHoveredIndex(i)}
                         onHoverEnd={() => isHoverEnabled && setHoveredIndex(null)}
-                        style={{ width: '16vw', minWidth: 120, maxWidth: 260, aspectRatio: '1/1', cursor: 'pointer', boxShadow: '0px 10px 4px 0px rgba(0,0,0,0.25)', position: 'relative', marginLeft: card.marginLeft, zIndex: card.zIndex }}
-                        onClick={() => handleCardClick(card.path)}
+                        style={{
+                            width: window.innerWidth <= 900 ? 'clamp(90px, 60vw, 160px)' : '16vw',
+                            minWidth: 90,
+                            maxWidth: window.innerWidth <= 900 ? 160 : 220,
+                            aspectRatio: '1/1',
+                            cursor: 'pointer',
+                            boxShadow: '0px 10px 4px 0px rgba(0,0,0,0.25)',
+                            position: 'relative',
+                            marginLeft: window.innerWidth <= 900 ? 0 : card.marginLeft,
+                            zIndex: card.zIndex,
+                            marginTop: window.innerWidth <= 900 && i !== 0 ? '-40px' : 0,
+                            marginBottom: window.innerWidth <= 900 ? 'clamp(8px, 2vw, 24px)' : 0,
+                        }}
+                        onClick={() => isHoverEnabled && navigate(card.path)}
                     >
                         <img
                             src={card.img}
@@ -148,7 +163,7 @@ function JourneyPage() {
                     variants={nameVariants}
                     initial="initial"
                     animate="hover"
-                    style={{ position: 'absolute', bottom: '28vh', left: 0, right: 0, textAlign: 'center', color: 'white', fontWeight: 600, fontSize: '1.2vw', pointerEvents: 'none', zIndex: 10 }}
+                    style={{ position: 'absolute', bottom: '24vh', left: 0, right: 0, textAlign: 'center', color: 'white', fontWeight: 600, fontSize: 'clamp(1rem, 4vw, 1.2vw)', pointerEvents: 'none', zIndex: 10 }}
                 >
                     {cardData[hoveredIndex].name}
                 </motion.div>

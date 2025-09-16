@@ -9,7 +9,10 @@ import ExperiencePage from './ExperiencePage';
 import SkillPage from './SkillPage';
 import ContactPage from './ContactPage';
 import AboutPage from './AboutPage';
-import bottomImage from '../assets/bottom-image.png';
+import ProjectPage from './ProjectPage';
+import bottomImage from '../assets/vinyl.png';
+import HackathonPage from './HackathonPage';
+import HackathonDetailsPage from './HackathonDetailsPage';
 
 // Rotating Navigation Component
 function RotatingNavigation() {
@@ -20,25 +23,23 @@ function RotatingNavigation() {
   const isDraggingRef = useRef(false);
   const imageRef = useRef(null);
   const containerRef = useRef(null); // Ref for the main container
-  const [currentPage, setCurrentPage] = useState('about');
   const [rotationAngle, setRotationAngle] = useState(0);
   const angleRef = useRef(0);
   const [showPageName, setShowPageName] = useState(false);
   const [currentPageName, setCurrentPageName] = useState('');
-  const [showNavigationFeedback, setShowNavigationFeedback] = useState(false);
 
   const pageAngles = {
     about: 0,
-    journey: 90,
-    availability: 180,
-    contact: 270,
+    contact: 90,
+    project: 180,
+    journey: 270,
   };
 
   const pageNames = {
     about: 'About Me',
-    journey: 'My Journey',
-    availability: 'Availability',
     contact: 'Contact',
+    project: 'Projects',
+    journey: 'My Journey',
   };
 
   useEffect(() => {
@@ -46,9 +47,8 @@ function RotatingNavigation() {
     let page = 'about';
     if (path === '/') page = 'about';
     else if (path === '/journey') page = 'journey';
-    else if (path === '/availability') page = 'availability';
+    else if (path === '/project' || path === '/projects') page = 'project';
     else if (path === '/contact') page = 'contact';
-    setCurrentPage(page);
     const newAngle = pageAngles[page];
     setRotationAngle(newAngle);
     angleRef.current = newAngle;
@@ -106,10 +106,10 @@ function RotatingNavigation() {
     setRotationAngle(normalized);
     angleRef.current = normalized;
     let targetPage = 'about';
-    if (normalized >= 315 || normalized < 45) targetPage = 'about';
-    else if (normalized >= 45 && normalized < 135) targetPage = 'journey';
-    else if (normalized >= 135 && normalized < 225) targetPage = 'availability';
-    else if (normalized >= 225 && normalized < 315) targetPage = 'contact';
+    if ((normalized >= 315 && normalized < 360) || (normalized >= 0 && normalized < 45)) targetPage = 'about';
+    else if (normalized >= 45 && normalized < 135) targetPage = 'contact';
+    else if (normalized >= 135 && normalized < 225) targetPage = 'project';
+    else if (normalized >= 225 && normalized < 315) targetPage = 'journey';
     setCurrentPageName(pageNames[targetPage]);
     setShowPageName(true);
   };
@@ -122,12 +122,10 @@ function RotatingNavigation() {
     document.removeEventListener('mouseup', handleMouseUp);
     let targetPage = 'about';
     const angle = angleRef.current % 360;
-    if (angle >= 315 || angle < 45) targetPage = 'about';
-    else if (angle >= 45 && angle < 135) targetPage = 'journey';
-    else if (angle >= 135 && angle < 225) targetPage = 'availability';
-    else if (angle >= 225 && angle < 315) targetPage = 'contact';
-    setShowNavigationFeedback(true);
-    setTimeout(() => setShowNavigationFeedback(false), 2000);
+    if ((angle >= 315 && angle < 360) || (angle >= 0 && angle < 45)) targetPage = 'about';
+    else if (angle >= 45 && angle < 135) targetPage = 'contact';
+    else if (angle >= 135 && angle < 225) targetPage = 'project';
+    else if (angle >= 225 && angle < 315) targetPage = 'journey';
     if (targetPage === 'about') {
       navigate('/');
     } else {
@@ -150,10 +148,10 @@ function RotatingNavigation() {
     // Second click navigates
     let targetPage = 'about';
     const angle = angleRef.current % 360;
-    if (angle >= 315 || angle < 45) targetPage = 'about';
-    else if (angle >= 45 && angle < 135) targetPage = 'journey';
-    else if (angle >= 135 && angle < 225) targetPage = 'availability';
-    else if (angle >= 225 && angle < 315) targetPage = 'contact';
+    if ((angle >= 315 && angle < 360) || (angle >= 0 && angle < 45)) targetPage = 'about';
+    else if (angle >= 45 && angle < 135) targetPage = 'contact';
+    else if (angle >= 135 && angle < 225) targetPage = 'project';
+    else if (angle >= 225 && angle < 315) targetPage = 'journey';
 
     if (targetPage === 'about') {
       navigate('/');
@@ -167,19 +165,25 @@ function RotatingNavigation() {
     setIsExpanded(false); // Collapse after navigation
   };
 
+  // Responsive dial size: clamp between 220px and 60vw
+  const dialSize = isExpanded ? 'clamp(220px, 60vw, 380px)' : 'clamp(220px, 60vw, 500px)';
   return (
     <div
-      ref={containerRef} // Attach the ref here
+      ref={containerRef}
       style={{
         position: 'fixed',
         bottom: 0,
         left: '50%',
         transform: 'translateX(-50%)',
-        zIndex: isExpanded ? '50' : '3',
+        zIndex: isExpanded ? '50' : '0',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         transition: 'all 0.3s ease',
+        width: '50vw',
+        maxWidth: '50vw',
+        maxHeight:'70vh',
+        // pointerEvents removed to restore clickability
       }}
     >
       {/* Page Name Display */}
@@ -194,7 +198,6 @@ function RotatingNavigation() {
             fontWeight: 600,
             fontSize: '18px',
             textAlign: 'center',
-            marginBottom: '10px',
             textShadow: '0px 2px 4px rgba(0,0,0,0.5)',
             backgroundColor: 'rgba(0,0,0,0.3)',
             padding: '8px 16px',
@@ -208,48 +211,87 @@ function RotatingNavigation() {
         </motion.div>
       )}
 
-      {/* Rotation Direction Indicator */}
-      {isDragging && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          style={{
-            color: '#FFFFFF',
-            fontFamily: 'Instrument Sans',
-            fontWeight: 500,
-            fontSize: '12px',
-            textAlign: 'center',
-            marginBottom: '5px',
-            opacity: 0.7,
-            userSelect: 'none',
-          }}
-        >
-          Rotating to: {Math.round(rotationAngle)}°
-        </motion.div>
-      )}
 
       {/* Rotating Bottom Image - Sticky at bottom, half visible */}
       <div
         style={{
-          width: isExpanded ? '380px' : '500px',
-          height: isExpanded ? '380px' : '500px',
+          width: dialSize,
+          height: dialSize,
+          minWidth: '220px',
+          minHeight: '220px',
+          maxWidth: isExpanded ? '380px' : '500px',
+          maxHeight: isExpanded ? '380px' : '500px',
           userSelect: 'none',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           transition: 'all 0.3s ease',
-          transform: isExpanded ? 'translateY(-70px)' : 'translateY(55%)',
+          transform: isExpanded ? 'translateY(-7vw)' : 'translateY(70%)', // moved lower
           position: 'relative',
+          pointerEvents: 'auto', // allow interaction with dial
         }}
       >
-        {/* Direction Indicators (only visible when hovered) */}
+        {/* Direction Indicators (rotating with dial) */}
         {isExpanded && (
-          <>
-            <div style={{ position: 'absolute', top: '-36px', left: '50%', transform: 'translateX(-50%)', color: '#FFFFFF', fontFamily: 'Instrument Sans', fontWeight: 600, fontSize: '13px', opacity: 0.85, textAlign: 'center', userSelect: 'none' }}>About</div>
-            <div style={{ position: 'absolute', top: '50%', right: '-53px', transform: 'translateY(-50%)', color: '#FFFFFF', fontFamily: 'Instrument Sans', fontWeight: 600, fontSize: '13px', opacity: 0.85, textAlign: 'center', userSelect: 'none' }}>Journey</div>
-            <div style={{ position: 'absolute', bottom: '-36px', left: '50%', transform: 'translateX(-50%)', color: '#FFFFFF', fontFamily: 'Instrument Sans', fontWeight: 600, fontSize: '13px', opacity: 0.85, textAlign: 'center', userSelect: 'none' }}>Availability</div>
-            <div style={{ position: 'absolute', top: '50%', left: '-53px', transform: 'translateY(-50%)', color: '#FFFFFF', fontFamily: 'Instrument Sans', fontWeight: 600, fontSize: '13px', opacity: 0.85, textAlign: 'center', userSelect: 'none' }}>Contact</div>
-          </>
+          <motion.div
+            style={{
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              top: 0,
+              left: 0,
+              pointerEvents: 'none',
+              zIndex: 2,
+            }}
+            animate={{ rotate: rotationAngle }}
+            transition={isDragging ? { duration: 0 } : { type: 'spring', stiffness: 300, damping: 30 }}
+          >
+            {/* Sticky edge labels using trigonometry */}
+            {(() => {
+              // Responsive label widths and font sizes
+              const labels = [
+                { text: 'About', angle: 0, rotate: 0, width: 'clamp(50px, 10vw, 65px)' },
+                { text: 'Journey', angle: 90, rotate: 0, width: 'clamp(60px, 13vw, 86.37px)' },
+                { text: 'Projects', angle: 180, rotate: 0, width: 'clamp(60px, 13vw, 86.37px)' },
+                { text: 'Contact', angle: 270, rotate: 0, width: 'clamp(60px, 13vw, 86.37px)' },
+              ];
+              // Responsive radius based on dial size
+              const dial = containerRef.current?.querySelector('div > img')?.offsetWidth || (isExpanded ? 380 : 500);
+              const radius = dial / 2 - 30;
+              return labels.map(({ text, angle, rotate, width }) => {
+                const rad = (angle - 90) * (Math.PI / 180);
+                const x = radius * Math.cos(rad);
+                const y = radius * Math.sin(rad);
+                return (
+                  <motion.div
+                    key={text}
+                    style={{
+                      position: 'absolute',
+                      left: `calc(50% + ${x}px)`,
+                      top: `calc(50% + ${y}px)`,
+                      width: width,
+                      height: 'clamp(18px, 3vw, 23px)',
+                      fontFamily: 'Instrument Sans',
+                      fontStyle: 'normal',
+                      fontWeight: 600,
+                      fontSize: 'clamp(13px, 2.5vw, 20px)',
+                      lineHeight: 'clamp(18px, 3vw, 24px)',
+                      color: '#FFFFFF',
+                      textAlign: 'center',
+                      userSelect: 'none',
+                      pointerEvents: 'none',
+                      letterSpacing: '0px',
+                      textShadow: '0 2px 8px #000',
+                      transform: `translate(-50%, -50%) rotate(${-rotationAngle}deg)`,
+                    }}
+                    transition={{ duration: 0 }}
+                  >
+                    {text}
+                  </motion.div>
+                );
+              });
+            })()}
+          </motion.div>
         )}
         <motion.img
           ref={imageRef}
@@ -266,6 +308,7 @@ function RotatingNavigation() {
             cursor: isExpanded ? (isDragging ? 'grabbing' : 'grab') : 'pointer',
             boxShadow: isDragging ? '0 10px 30px rgba(0,0,0,0.3)' : isExpanded ? '0 18px 46px rgba(0,0,0,0.45)' : '0 5px 15px rgba(0,0,0,0.2)',
             transition: 'box-shadow 0.2s ease',
+            zIndex: 1,
           }}
           animate={{ rotate: rotationAngle }}
           transition={isDragging ? { duration: 0 } : { type: 'spring', stiffness: 300, damping: 30 }}
@@ -314,15 +357,11 @@ function App() {
           <Route path="/education" element={<EducationPage />} />
           <Route path="/experience" element={<ExperiencePage />} />
           <Route path="/skills" element={<SkillPage />} />
+          <Route path="/hackathon" element={<HackathonPage />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route
-            path="/availability"
-            element={
-              <div style={{ paddingTop: 100, color: '#FFFFFF', textAlign: 'center' }}>
-                Availability Page
-              </div>
-            }
-          />
+          <Route path="/project" element={<ProjectPage />} />
+          <Route path="/projects" element={<ProjectPage />} />
+          <Route path="/hackathon-details/:name" element={<HackathonDetailsPage />} />
           {/* Add more routes as needed */}
         </Routes>
 

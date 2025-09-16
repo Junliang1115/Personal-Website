@@ -51,6 +51,12 @@ A modern, responsive personal website built with React. This project provides a 
 
 5. Open [http://localhost:3000](http://localhost:3000) to view it in your browser
 
+## Backend
+
+```
+node server/index.js
+```
+
 ## Customization
 
 ### Personal Information

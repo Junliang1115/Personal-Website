@@ -8,6 +8,37 @@ function ContactPage() {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [message, setMessage] = useState('');
 
+    // Confirmation message state removed
+    const [loading, setLoading] = useState(false);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        try {
+            const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    firstName,
+                    lastName,
+                    email,
+                    phoneNumber,
+                    message,
+                }),
+            });
+            if (res.ok) {
+                setFirstName('');
+                setLastName('');
+                setEmail('');
+                setPhoneNumber('');
+                setMessage('');
+            }
+        } catch (err) {
+            // Do nothing
+        }
+        setLoading(false);
+    };
+
     return (
         <div
             style={{
@@ -91,42 +122,51 @@ function ContactPage() {
                     boxShadow: '0 4px 32px 0 rgba(0,0,0,0.25)',
                 }}
             >
-                <form style={{ display: 'flex', flexDirection: 'column', gap: '1.2vh', width: '100%' }}>
+                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.2vh', width: '100%' }}>
                     <div style={{ display: 'flex', gap: '1vw', width: '100%' }}>
                         <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                             <label style={{ color: '#fff', fontWeight: 600, fontSize: '1vw', marginBottom: 4 }}>First name</label>
-                            <input type="text" placeholder="John" required style={{ width: '100%', marginTop: 4, background: '#E5DFDF', border: 'none', borderRadius: 8, padding: '0.6vw 0.8vw', fontSize: '0.95vw', fontFamily: 'Instrument Sans', fontWeight: 500 }} />
+                            <input type="text" placeholder="John" required
+                                value={firstName}
+                                onChange={e => setFirstName(e.target.value)}
+                                style={{ width: '100%', marginTop: 4, background: '#E5DFDF', border: 'none', borderRadius: 8, padding: '0.6vw 0.8vw', fontSize: '0.95vw', fontFamily: 'Instrument Sans', fontWeight: 500 , zIndex: 4}} />
                         </div>
                         <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                             <label style={{ color: '#fff', fontWeight: 600, fontSize: '1vw', marginBottom: 4 }}>Last name</label>
                             <input type="text" placeholder="Doe" required
-                            value={lastName}
-                            onChange={(e) => setLastName(e.target.value)}
-                            style={{ width: '100%', marginTop: 4, background: '#E5DFDF', border: 'none', borderRadius: 8, padding: '0.6vw 0.8vw', fontSize: '0.95vw', fontFamily: 'Instrument Sans', fontWeight: 500 }} />
+                                value={lastName}
+                                onChange={e => setLastName(e.target.value)}
+                                style={{ width: '100%', marginTop: 4, background: '#E5DFDF', border: 'none', borderRadius: 8, padding: '0.6vw 0.8vw', fontSize: '0.95vw', fontFamily: 'Instrument Sans', fontWeight: 500 }} />
                         </div>
                     </div>
                     <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
                         <label style={{ color: '#fff', fontWeight: 600, fontSize: '1vw', marginBottom: 4 }}>Email</label>
-                        <input type="email" placeholder="someone@gmail.com" required
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            style={{ width: '100%', marginTop: 4, background: '#E5DFDF', border: 'none', borderRadius: 8, padding: '0.6vw 0.8vw', fontSize: '0.95vw', fontFamily: 'Instrument Sans', fontWeight: 500 }} />
+                        <input
+                            type="email"
+                            placeholder="someone@gmail.com"
+                            required
+                            value={email || ''}
+                            onChange={e => setEmail(e.target.value)}
+                            autoComplete="email"
+                            style={{ width: '100%', marginTop: 4, background: '#E5DFDF', border: 'none', borderRadius: 8, padding: '0.6vw 0.8vw', fontSize: '0.95vw', fontFamily: 'Instrument Sans', fontWeight: 500, zIndex: 4 }}
+                        />
                     </div>
                     <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
                         <label style={{ color: '#fff', fontWeight: 600, fontSize: '1vw', marginBottom: 4 }}>Phone Number</label>
                         <input type="tel" placeholder="012 - 345 6789"
                             value={phoneNumber}
-                            onChange={(e) => setPhoneNumber(e.target.value)}
+                            onChange={e => setPhoneNumber(e.target.value)}
                             style={{ width: '100%', marginTop: 4, background: '#E5DFDF', border: 'none', borderRadius: 8, padding: '0.6vw 0.8vw', fontSize: '0.95vw', fontFamily: 'Instrument Sans', fontWeight: 500, zIndex: 4 }} />
                     </div>
                     <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
                         <label style={{ color: '#fff', fontWeight: 600, fontSize: '1vw', marginBottom: 4 }}>Message</label>
                         <textarea type="text" placeholder="Write a thought..." required
                             value={message}
-                            onChange={(e) => setMessage(e.target.value)}
+                            onChange={e => setMessage(e.target.value)}
                             style={{ width: '100%', marginTop: 4, background: '#E5DFDF', border: 'none', borderRadius: 8, padding: '0.6vw 0.8vw', fontSize: '0.95vw', fontFamily: 'Instrument Sans', fontWeight: 500, minHeight: 90, resize: 'vertical', zIndex: 10 , position: 'relative'}} />
                     </div>
-                    <button type="submit" style={{ background: '#BA3D01', color: '#fff', border: 'none', borderRadius: 8, padding: '0.7vw', fontWeight: 600, fontSize: '1vw', marginTop: '1vh', cursor: 'pointer', alignSelf: 'flex-end', width: '30%' }}>Send Message</button>
+                    <button type="submit" disabled={loading} style={{ background: '#BA3D01', color: '#fff', border: 'none', borderRadius: 8, padding: '0.7vw', fontWeight: 600, fontSize: '1vw', marginTop: '1vh', cursor: loading ? 'not-allowed' : 'pointer', alignSelf: 'flex-end', width: '30%' }}>{loading ? 'Sending...' : 'Send Message'}</button>
+                    {/* Confirmation message removed as requested */}
                 </form>
             </div>
         </div>

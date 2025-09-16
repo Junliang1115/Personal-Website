@@ -1,0 +1,5 @@
+// Add this to your package.json to proxy API requests to the backend
+// This allows POST /api/contact to work from the React dev server
+{
+  "proxy": "http://localhost:5000"
+}
