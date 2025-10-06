@@ -11,7 +11,7 @@ function HackathonDetailsPage() {
 
     useEffect(() => {
         const formattedName = name.replace(/-/g, ' ');
-        fetch(`https://junliang-portfolio-backend.onrender.com/api/hackathons/${formattedName}`)
+        fetch(`/api/hackathons/${formattedName}`)
             .then(res => {
                 if (!res.ok) {
                     throw new Error('Hackathon not found');

@@ -59,7 +59,7 @@ const Projects = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch('https://junliang-portfolio-backend.onrender.com/api/hackathons');
+  const response = await fetch('/api/hackathons');
         if (!response.ok) {
           throw new Error('Failed to fetch projects');
         }

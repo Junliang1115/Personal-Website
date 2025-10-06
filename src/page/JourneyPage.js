@@ -52,8 +52,8 @@ function JourneyPage() {
             setShowSubtitle(true);
             setIsHoverEnabled(true);
         };
-                sequence();
-    }, []);
+        sequence();
+    }, [controls]);
 
     const cardVariants = {
         hidden: { opacity: 0, scale: 0.8, transition: { duration: 0.5 } },
