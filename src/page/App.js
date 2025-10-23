@@ -16,7 +16,7 @@ import HackathonDetailsPage from './HackathonDetailsPage';
 
 // Rotating Navigation Component
 function RotatingNavigation() {
-  const navigate = useNavigate();
+  const navigate = useNavigate();   
   const location = useLocation();
   const [isDragging, setIsDragging] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
