@@ -1,28 +1,22 @@
-# Documentation for AboutPage Component
+# AboutPage Component Documentation
 
 ## Description
-
-The `AboutPage` component is a React functional component that displays a personal introduction. It features a responsive layout with a profile image and a text section that describes the individual, Jun Liang, including their background, interests, and aspirations. The component utilizes inline styles and CSS classes for layout and design.
+The `AboutPage` component is a React functional component that displays a personal introduction. It features a profile image and a brief description of the individual, styled with a responsive layout and a gradient background. The component is designed to be visually appealing and informative, suitable for personal or portfolio websites.
 
 ## Functions/Methods
 
 ### AboutPage
+This is the main functional component that renders the About page.
 
 #### Parameters
-
-- **None**: The `AboutPage` component does not accept any parameters.
+- **None**
 
 #### Return Value
+- Returns a JSX element representing the About page layout, including text and an image.
 
-- **JSX Element**: Returns a structured layout containing a greeting, a brief introduction, and a profile image.
-
-#### Detailed Usage Example
-
-To use the `AboutPage` component, import it into your main application file and include it in your JSX:
-
+#### Usage Example
 ```javascript
-import React from "react";
-import AboutPage from "./path/to/AboutPage";
+import AboutPage from './path/to/AboutPage';
 
 function App() {
   return (
@@ -31,24 +25,23 @@ function App() {
     </div>
   );
 }
-
-export default App;
 ```
 
 ## Important Notes
+- The component uses inline styles for layout and responsiveness, which may not be optimal for larger applications. Consider using CSS modules or styled-components for better maintainability.
+- The profile image is imported from a local asset directory. Ensure the path is correct to avoid broken image links.
+- The component is responsive, adjusting margins based on the window width, which may affect layout on different devices.
 
-- The component uses inline styles for layout, which may affect maintainability. Consider using CSS modules or styled-components for better styling practices.
-- The profile image is imported from a local assets directory. Ensure the path is correct to avoid broken image links.
-- The component is responsive, adjusting margins based on the window width, which may require testing on various devices for optimal appearance.
-
-## Mermaid Diagram
-
+## Flowchart
 ```mermaid
 flowchart TD
-    A[AboutPage Component] --> B[Greeting Section]
-    A --> C[Profile Image Section]
-    B --> D[Text Content]
-    C --> E[Image Display]
+    A[Start] --> B[Render AboutPage]
+    B --> C{Is window width < 600?}
+    C -- Yes --> D[Set specific margins for small screens]
+    C -- No --> E[Set margins for larger screens]
+    D --> F[Display Profile Image and Text]
+    E --> F
+    F --> G[End]
 ```
 
-This diagram illustrates the structure of the `AboutPage` component, highlighting its main sections: the greeting and the profile image.
+This documentation provides a concise yet thorough understanding of the `AboutPage` component, enabling developers to integrate and utilize it effectively in their projects.
