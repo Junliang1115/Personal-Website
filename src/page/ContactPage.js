@@ -16,7 +16,7 @@ function ContactPage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(true);   
+        setLoading(true);
         setNotification('');
         setShowNotification(false);
         try {
