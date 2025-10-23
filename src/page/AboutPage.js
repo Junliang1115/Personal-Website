@@ -13,7 +13,7 @@ function AboutPage() {
             A Computer Science student majoring in Intelligence Computing at Universiti Sains Malaysia (USM) with a curious mind and a builder's spirit. I'm passionate about technology, art, and ideas that solve real problems.<br /><br />
             Right now, I'm sharpening my skills in AI, product design, and system architecture — with a dream to launch my own startup in the near future. Something that blends innovation with real impact.<br /><br />
             This site is my digital lab — a space to explore, create, and share the journey.<br /><br />
-            Let's make ideas real.
+            Let's make ideas real.   
           </p>
         </div>
       </div>

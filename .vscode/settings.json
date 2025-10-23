@@ -12,5 +12,14 @@
   "editor.minimap.enabled": false,
   "editor.renderWhitespace": "none",
   "editor.smoothScrolling": false,
-  "explorer.compactFolders": false
+  "explorer.compactFolders": false,
+  "[markdown]": {
+    "editor.snippetSuggestions": "top",
+    "editor.quickSuggestions": {
+      "comments": "on",
+      "strings": "on",
+      "other": "on"
+    },
+    "editor.suggest.showWords": false
+  }
 }
