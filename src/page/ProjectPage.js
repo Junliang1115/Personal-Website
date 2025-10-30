@@ -31,21 +31,38 @@ const ProjectCard = ({ title, description, link, hackathonName, type }) => {
             {type}
           </div>
         )}
-        {link && (
-          <a href={link} target="_blank" rel="noopener noreferrer" style={{
-            alignSelf: 'flex-end',
-            background: '#5C1F1F',
-            border: '1px solid #ffffffff',
-            cursor: 'pointer',
-            color: 'white',
-            padding: '8px 12px',
-            borderRadius: '5px',
-            textDecoration: 'none',
-            fontSize: '14px',
-            marginTop: '10px'
-          }}>
-            More Details
-          </a>
+        {(
+          hackathonName ?
+            <a href={`/hackathon-details/${hackathonName.replace(/\s/g, '-')}`} style={{
+              alignSelf: 'flex-end',
+              background: '#5C1F1F',
+              border: '1px solid #ffffffff',
+              cursor: 'pointer',
+              color: 'white',
+              padding: '8px 12px',
+              borderRadius: '5px',
+              textDecoration: 'none',
+              fontSize: '14px',
+              marginTop: '10px'
+            }}>
+              More Details
+            </a>
+          : link && (
+            <a href={link} target="_blank" rel="noopener noreferrer" style={{
+              alignSelf: 'flex-end',
+              background: '#5C1F1F',
+              border: '1px solid #ffffffff',
+              cursor: 'pointer',
+              color: 'white',
+              padding: '8px 12px',
+              borderRadius: '5px',
+              textDecoration: 'none',
+              fontSize: '14px',
+              marginTop: '10px'
+            }}>
+              More Details
+            </a>
+          )
         )}
     </div>
   );
