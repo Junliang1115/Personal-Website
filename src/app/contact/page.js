@@ -124,10 +124,10 @@ export default function ContactPage() {
             {/* Info Section */}
             <div className="w-full lg:w-1/2 max-w-xl text-white">
                 <h1 className="text-4xl sm:text-6xl font-black mb-8 leading-tight tracking-tight">
-                    Let's <span className="text-[#BA3D01]">Connect</span>
+                    Let&apos;s <span className="text-[#BA3D01]">Connect</span>
                 </h1>
                 <p className="text-xl text-gray-300 leading-relaxed mb-12">
-                    Whether you're down to build something cool, collaborate on a wild idea, or just want to say hi — I’m all ears. Follow my journey on social media or drop a message here.
+                    Whether you&apos;re down to build something cool, collaborate on a wild idea, or just want to say hi — I’m all ears. Follow my journey on social media or drop a message here.
                 </p>
 
                 <div className="space-y-4">

@@ -53,7 +53,7 @@ export default function AboutPage() {
               className="text-3xl sm:text-5xl xl:text-6xl 2xl:text-7xl font-black font-instrument mb-8 leading-[1.1] lg:leading-[0.95] tracking-tighter"
             >
               Hey there, <br />
-              <span className="text-[#BA3D01] drop-shadow-[0_0_30px_rgba(186,61,1,0.2)]">I'm Jun Liang.</span>
+              <span className="text-[#BA3D01] drop-shadow-[0_0_30px_rgba(186,61,1,0.2)]">I&apos;m Jun Liang.</span>
             </motion.h1>
 
             <motion.div
@@ -63,7 +63,7 @@ export default function AboutPage() {
               <div className="absolute inset-0 bg-gradient-to-br from-[#BA3D01]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="relative space-y-6 text-base sm:text-lg xl:text-xl 2xl:text-2xl font-instrument leading-relaxed text-gray-400 sm:text-gray-300">
                 <p>
-                  A Computer Science student at USM specializing in <span className="text-white font-semibold">Intelligent Computing</span>. I don't just write code; I craft digital experiences that balance raw power with elegant design.
+                  A Computer Science student at USM specializing in <span className="text-white font-semibold">Intelligent Computing</span>. I don&apos;t just write code; I craft digital experiences that balance raw power with elegant design.
                 </p>
                 <p>
                   Currently architecting solutions where AI meets intuition, while preparing to venture into the startup ecosystem. I believe the best products are born at the intersection of <span className="italic text-white">logic and imagination</span>.
