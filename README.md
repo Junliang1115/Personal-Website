@@ -46,7 +46,7 @@ A modern, responsive personal website built with React. This project provides a 
 4. Start the development server
 
    ```
-   npm start
+   npm run dev
    ```
 
 5. Open [http://localhost:3000](http://localhost:3000) to view it in your browser
