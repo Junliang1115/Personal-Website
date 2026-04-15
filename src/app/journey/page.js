@@ -95,8 +95,8 @@ export default function JourneyPage() {
             };
         },
         hover: (i) => ({
-            y: -40,
-            scale: 1.1,
+            y: -60,
+            scale: 1.15,
             zIndex: 50,
             rotate: 0,
             transition: { type: 'spring', bounce: 0.4, duration: 0.4 },
@@ -131,7 +131,7 @@ export default function JourneyPage() {
             </div>
 
             {/* Cards Container */}
-            <div className="relative w-full max-w-5xl grid grid-cols-2 lg:flex lg:flex-row items-center justify-center gap-x-4 gap-y-16 lg:gap-0 mt-8 pb-32 lg:pb-0 min-h-[500px] lg:min-h-0">
+            <div className="relative w-full max-w-5xl grid grid-cols-2 lg:flex lg:flex-row items-center justify-center gap-x-6 gap-y-20 lg:gap-0 mt-4 pb-32 lg:pb-0 min-h-[600px] lg:min-h-0">
                 {cardData.map((card, i) => (
                     <motion.div
                         key={card.name}
@@ -143,7 +143,7 @@ export default function JourneyPage() {
                         onHoverEnd={() => isHoverEnabled && setHoveredIndex(null)}
                         className="relative cursor-pointer transition-shadow mx-auto lg:mx-0"
                         style={{
-                            width: 'min(160px, 40vw)', // Smaller for 2x2 grid
+                            width: 'min(300px, 44vw)', // Dynamic size: larger on desktop, fits mobile 2x2 grid
                             aspectRatio: '1/1',
                             boxShadow: '0px 20px 40px -10px rgba(0,0,0,0.5)',
                             zIndex: hoveredIndex === i ? 50 : card.zIndex,
@@ -151,11 +151,11 @@ export default function JourneyPage() {
                         onClick={() => isHoverEnabled && router.push(card.path)}
                     >
                         {/* Mobile Text Label (Optimized for Grid) */}
-                        <div className="absolute -bottom-10 left-0 right-0 text-center lg:hidden">
-                            <span className="text-[8px] font-black uppercase tracking-[0.2em] text-[#BA3D01] block mb-0.5">
+                        <div className="absolute -bottom-12 left-0 right-0 text-center lg:hidden">
+                            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#BA3D01] block mb-1">
                                 Track 0{i + 1}
                             </span>
-                            <h4 className="text-[13px] font-black text-white tracking-tight leading-none uppercase">{card.name}</h4>
+                            <h4 className="text-[16px] font-black text-white tracking-tight leading-none uppercase">{card.name}</h4>
                         </div>
 
                         <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 group shadow-2xl">
