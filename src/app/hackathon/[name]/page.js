@@ -97,21 +97,19 @@ export default function HackathonDetailsPage() {
                     {/* Media Container */}
                     <div className="lg:col-span-12 xl:col-span-8">
                         {embedUrl ? (
-                            <div className="aspect-w-16 aspect-h-9 w-full relative rounded-3xl overflow-hidden bg-white/5 border border-white/10 shadow-2xl group animate-in fade-in zoom-in duration-700">
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+                            <div className="relative aspect-video rounded-3xl overflow-hidden bg-white/5 border border-white/10 shadow-2xl group animate-in fade-in zoom-in duration-700">
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                                 <iframe
                                     src={embedUrl}
                                     title={hackathon.name}
-                                    className="w-full h-full rounded-3xl"
+                                    className="w-full h-full relative z-10"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     allowFullScreen
                                 ></iframe>
                             </div>
                         ) : (
-                            <div className="aspect-w-16 aspect-h-9 w-full rounded-3xl bg-white/5 border border-dashed border-white/20">
-                                <div className="flex items-center justify-center h-full text-gray-500 italic">
-                                    No presentation media available
-                                </div>
+                            <div className="aspect-video flex items-center justify-center rounded-3xl bg-white/5 border border-dashed border-white/20 text-gray-500 italic">
+                                No presentation media available
                             </div>
                         )}
                     </div>

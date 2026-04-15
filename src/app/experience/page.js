@@ -86,7 +86,7 @@ export default function ExperiencePage() {
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
                 {/* Left Column: Experience Details */}
-                <div className="lg:col-span-8">
+                <div className="lg:col-span-8 order-2 lg:order-1">
                     <div className="bg-black/40 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-4 sm:p-10 shadow-3xl relative overflow-hidden group">
                         <div
                             ref={expRef}
@@ -172,8 +172,8 @@ export default function ExperiencePage() {
                 </div>
 
                 {/* Right Column: Visual */}
-                <div className="lg:col-span-4 sticky top-32 flex flex-col items-center">
-                    <div className="relative group w-full max-w-sm">
+                <div className="lg:col-span-4 order-1 lg:order-2 sticky top-32 flex flex-col items-center">
+                    <div className="relative group w-full max-w-[280px] sm:max-w-sm">
                         {/* Orbiting Ring Effect */}
                         <div className="absolute -inset-4 border border-[#BA3D01]/10 rounded-[3rem] animate-[spin_10s_linear_infinite] pointer-events-none">
                             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#BA3D01] rounded-full blur-[2px]"></div>

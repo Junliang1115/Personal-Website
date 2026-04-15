@@ -84,7 +84,7 @@ export default function EducationPage() {
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
                 {/* Left Column: Timeline */}
-                <div className="lg:col-span-8">
+                <div className="lg:col-span-8 order-2 lg:order-1">
                     <div className="bg-black/40 backdrop-blur-xl border border-white/10 p-4 sm:p-10 rounded-[2.5rem] shadow-3xl">
                         <div
                             ref={descRef}
@@ -118,8 +118,8 @@ export default function EducationPage() {
                                     <div key={i} className="group/item relative pl-10 border-l border-white/10 hover:border-[#BA3D01]/50 transition-colors">
                                         <div className="absolute -left-[5px] top-0 w-2.5 h-2.5 rounded-full bg-[#BA3D01] shadow-[0_0_15px_rgba(186,61,1,0.5)] group-hover/item:scale-150 transition-transform"></div>
                                         <div className="text-[10px] font-black uppercase tracking-[0.3em] text-[#BA3D01] mb-2">{edu.year}</div>
-                                        <h3 className="text-3xl font-black text-white group-hover/item:text-[#BA3D01] transition-colors tracking-tight leading-none mb-4">{edu.school}</h3>
-                                        <div className="text-xl text-gray-200 font-bold mb-1">{edu.degree} <span className="text-gray-500 font-medium">/ {edu.major}</span></div>
+                                        <h3 className="text-2xl sm:text-3xl font-black text-white group-hover/item:text-[#BA3D01] transition-colors tracking-tight leading-none mb-3">{edu.school}</h3>
+                                        <div className="text-lg sm:text-xl text-gray-200 font-bold mb-1">{edu.degree} <span className="text-gray-500 font-medium">/ {edu.major}</span></div>
                                         <div className="text-sm font-bold uppercase tracking-widest text-gray-400 mt-2 italic">{edu.stats}</div>
                                     </div>
                                 ))}
@@ -129,8 +129,8 @@ export default function EducationPage() {
                 </div>
 
                 {/* Right Column: Visual */}
-                <div className="lg:col-span-4 sticky top-32 flex flex-col items-center">
-                    <div className="relative group w-full max-w-sm">
+                <div className="lg:col-span-4 order-1 lg:order-2 sticky top-32 flex flex-col items-center">
+                    <div className="relative group w-full max-w-[280px] sm:max-w-sm">
                         {/* Orbiting Ring Effect */}
                         <div className="absolute -inset-4 border border-[#BA3D01]/10 rounded-[3rem] animate-[spin_10s_linear_infinite] pointer-events-none">
                             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#BA3D01] rounded-full blur-[2px]"></div>

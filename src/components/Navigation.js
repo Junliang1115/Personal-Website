@@ -5,6 +5,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import logoImage from '@/assets/logo.png';
+import { motion, AnimatePresence } from 'framer-motion';
 
 function Navigation() {
     const pathname = usePathname();
@@ -63,44 +64,6 @@ function Navigation() {
                     </a>
                 </div>
 
-                {/* Mobile Menu Button */}
-                <button
-                    onClick={() => setMenuOpen(!menuOpen)}
-                    className="lg:hidden relative z-[110] p-2 text-white"
-                    aria-label="Toggle Menu"
-                >
-                    <div className="w-8 h-6 flex flex-col justify-between">
-                        <span className={`h-1 w-full bg-white rounded-full transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-2.5' : ''}`}></span>
-                        <span className={`h-1 w-full bg-white rounded-full transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`}></span>
-                        <span className={`h-1 w-full bg-white rounded-full transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-2.5' : ''}`}></span>
-                    </div>
-                </button>
-
-                {/* Mobile Navigation Drawer */}
-                <div className={`fixed inset-0 bg-[#1D1515] z-[100] transition-all duration-500 flex flex-col items-center justify-center gap-8 ${
-                    menuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
-                }`}>
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.name}
-                            href={link.href}
-                            onClick={() => setMenuOpen(false)}
-                            className={`text-3xl font-bold uppercase tracking-tighter transition-all ${
-                                isLinkActive(link) ? 'text-[#BA3D01]' : 'text-gray-400'
-                            }`}
-                        >
-                            {link.name}
-                        </Link>
-                    ))}
-                    <a
-                        href="/resume.pdf"
-                        download
-                        onClick={() => setMenuOpen(false)}
-                        className="mt-8 bg-[#BA3D01] text-white px-12 py-4 rounded-full text-xl font-bold uppercase tracking-widest"
-                    >
-                        Resume
-                    </a>
-                </div>
             </div>
         </nav>
     );

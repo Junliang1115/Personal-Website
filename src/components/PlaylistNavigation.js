@@ -22,17 +22,33 @@ export default function PlaylistNavigation() {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
-        const handleMouseMove = (e) => {
-            // If mouse is within 150px from bottom, show it
-            if (window.innerHeight - e.clientY < 150) {
+        const checkMobile = () => {
+            if (window.innerWidth < 1024) {
                 setIsVisible(true);
             } else {
                 setIsVisible(false);
             }
         };
 
+        const handleMouseMove = (e) => {
+            if (window.innerWidth >= 1024) {
+                if (window.innerHeight - e.clientY < 150) {
+                    setIsVisible(true);
+                } else {
+                    setIsVisible(false);
+                }
+            }
+        };
+
+        // Initial check
+        checkMobile();
+
         window.addEventListener('mousemove', handleMouseMove);
-        return () => window.removeEventListener('mousemove', handleMouseMove);
+        window.addEventListener('resize', checkMobile);
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('resize', checkMobile);
+        };
     }, []);
 
     // Find current index with smarter matching

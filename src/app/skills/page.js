@@ -107,7 +107,7 @@ export default function SkillPage() {
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
                 {/* Left Column: Skills & Certificates */}
-                <div className="lg:col-span-8 flex flex-col gap-12">
+                <div className="lg:col-span-8 order-2 lg:order-1 flex flex-col gap-12">
                     {/* Skills Box */}
                     <div className="bg-black/40 backdrop-blur-xl border border-white/10 p-4 sm:p-10 rounded-[2.5rem] shadow-3xl">
                         <h2 className="text-[10px] font-black uppercase tracking-[0.4em] mb-10 text-[#BA3D01] bg-[#BA3D01]/5 inline-block px-4 py-1.5 rounded-full border border-[#BA3D01]/20">Core Competencies</h2>
@@ -158,8 +158,8 @@ export default function SkillPage() {
                 </div>
 
                 {/* Right Column: Visual & Controls */}
-                <div className="lg:col-span-4 sticky top-32 flex flex-col items-center">
-                    <div className="relative group w-full max-w-sm">
+                <div className="lg:col-span-4 order-1 lg:order-2 sticky top-32 flex flex-col items-center">
+                    <div className="relative group w-full max-w-[280px] sm:max-w-sm">
                         {/* Orbiting Ring Effect */}
                         <div className="absolute -inset-4 border border-[#BA3D01]/10 rounded-[3rem] animate-[spin_10s_linear_infinite] pointer-events-none">
                             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#BA3D01] rounded-full blur-[2px]"></div>

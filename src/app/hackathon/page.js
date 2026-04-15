@@ -5,10 +5,6 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import hackathonSide from '@/assets/hackathon.jpg';
-import hackAttack from '@/assets/hack attack.jpg';
-import kitahack from '@/assets/Kitahack.webp';
-import bizmaker from '@/assets/Bizmaker.jpg';
-import umh from '@/assets/umh.png';
 
 // images are mapped in the component
 
@@ -39,13 +35,6 @@ export default function HackathonPage() {
     const [scrolling, setScrolling] = useState(true);
     const [hackathonList, setHackathonList] = useState([]);
     const [loading, setLoading] = useState(true);
-
-    const imageMap = {
-        'Hack Attack 2.0': hackAttack,
-        'KitaHack': kitahack,
-        'UM Hackathon': umh,
-        'BizMaker': bizmaker
-    };
 
     useEffect(() => {
         fetch('/api/hackathons')
@@ -98,7 +87,7 @@ export default function HackathonPage() {
                 <div className="flex items-center gap-6">
                     <button
                         onClick={() => router.back()}
-                        className="p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl transition-all group active:scale-95"
+                        className="p-4 rounded-2xl transition-all group active:scale-95"
                         aria-label="Back"
                     >
                         <svg className="group-hover:-translate-x-1 transition-transform" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
@@ -107,7 +96,7 @@ export default function HackathonPage() {
                         </svg>
                     </button>
                     <div>
-                        <h1 className="text-5xl sm:text-7xl font-black tracking-tighter">Hackathons</h1>
+                        <h1 className="text-4xl sm:text-6xl font-black tracking-tighter">Hackathons</h1>
                         <p className="text-[#BA3D01] font-bold uppercase tracking-[0.3em] text-xs mt-2">Competing & Building at Scale</p>
                     </div>
                 </div>
@@ -115,7 +104,7 @@ export default function HackathonPage() {
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
                 {/* Left Column: Hackathon List */}
-                <div className="lg:col-span-8">
+                <div className="lg:col-span-8 order-2 lg:order-1">
                     <div className="bg-black/40 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-4 sm:p-8 shadow-3xl">
                         {loading ? (
                             <div className="flex flex-col items-center justify-center h-full min-h-[500px] space-y-6">
@@ -147,22 +136,11 @@ export default function HackathonPage() {
                                                 hidden: { opacity: 0, y: 20 },
                                                 visible: { opacity: 1, y: 0, transition: { type: 'spring', damping: 20 } }
                                             }}
-                                            className="group relative flex flex-col sm:flex-row items-center gap-8 p-8 rounded-[2rem] cursor-pointer bg-white/[0.03] border border-white/5 hover:border-[#BA3D01]/40 hover:bg-white/[0.06] transition-all duration-500 overflow-hidden shadow-xl"
+                                            className="group relative flex flex-col sm:flex-row items-center gap-4 p-6 rounded-[2rem] cursor-pointer bg-white/[0.03] border border-white/5 hover:border-[#BA3D01]/40 hover:bg-white/[0.06] transition-all duration-500 overflow-hidden shadow-xl"
                                             onClick={() => router.push(`/hackathon/${hackathon.name.replace(/\s/g, '-')}`)}
                                         >
                                             {/* Edge Shine Effect */}
                                             <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-
-                                            {/* Image Container */}
-                                            <div className="relative w-36 h-36 shrink-0 rounded-3xl overflow-hidden border-2 border-white/10 shadow-2xl group-hover:border-[#BA3D01]/50 transition-colors duration-500">
-                                                <Image
-                                                    src={imageMap[hackathon.name] || hackathonSide}
-                                                    alt={hackathon.name}
-                                                    fill
-                                                    className="object-cover group-hover:scale-110 transition-transform duration-1000 grayscale group-hover:grayscale-0"
-                                                />
-                                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
-                                            </div>
 
                                             {/* Info Content */}
                                             <div className="flex-1 w-full text-center sm:text-left space-y-4">
@@ -175,7 +153,7 @@ export default function HackathonPage() {
                                                     </span>
                                                 </div>
 
-                                                <h3 className="text-3xl sm:text-4xl font-black text-white group-hover:text-[#BA3D01] transition-colors leading-none tracking-tighter">
+                                                <h3 className="text-3xl sm:text-2xl font-black text-white group-hover:text-[#BA3D01] transition-colors leading-none tracking-tighter">
                                                     {hackathon.name}
                                                 </h3>
 
@@ -205,8 +183,8 @@ export default function HackathonPage() {
                 </div>
 
                 {/* Right Column: Visual */}
-                <div className="lg:col-span-4 sticky top-32 flex flex-col items-center">
-                    <div className="relative group w-full max-w-sm">
+                <div className="lg:col-span-4 order-1 lg:order-2 sticky top-32 flex flex-col items-center">
+                    <div className="relative group w-full max-w-[280px] sm:max-w-sm">
                         {/* Orbiting Ring Effect */}
                         <div className="absolute -inset-4 border border-[#BA3D01]/10 rounded-[3rem] animate-[spin_10s_linear_infinite] pointer-events-none">
                             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#BA3D01] rounded-full blur-[2px]"></div>
